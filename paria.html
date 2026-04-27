@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Arijita Paria | Cut the Cake - Birthday Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1e0520 0%, #2c0a38 50%, #1f0b2a 100%);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .story-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0s 0.8s;
+            background: radial-gradient(circle at 70% 20%, #ffd9e6 0%, #fdd0f2 15%, #f5bfef 30%, #e8b0e6 50%, #cf93d4 75%, #a35caf 100%);
+            z-index: 0;
+        }
+
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 80, 120, 0.25), rgba(156, 39, 176, 0.4));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0s 0s;
+            z-index: 10;
+        }
+
+        .premium-card {
+            max-width: 800px;
+            width: 88%;
+            background: rgba(30, 8, 40, 0.65);
+            backdrop-filter: blur(20px);
+            border-radius: 56px;
+            padding: 2rem 2rem;
+            text-align: center;
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 100, 150, 0.5);
+            border: 1px solid rgba(255, 200, 220, 0.5);
+            animation: cardReveal 0.6s ease-out forwards;
+            z-index: 5;
+        }
+
+        @keyframes cardReveal {
+            0% { transform: scale(0.92) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+        }
+
+        .name-glow-special {
+            background: linear-gradient(125deg, #FFB7C5, #FF7A9E, #E84A8C, #C154C7);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 3s infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* CAKE SECTION - YAHAN CLICK KARO */
+        .cake-section {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .cake-container {
+            background: linear-gradient(135deg, rgba(255, 180, 150, 0.3), rgba(255, 100, 130, 0.4));
+            backdrop-filter: blur(12px);
+            border-radius: 100px;
+            padding: 14px 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid rgba(255, 200, 180, 0.8);
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .cake-container:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 200, 170, 0.5), rgba(255, 120, 150, 0.6));
+            border-color: #ffb347;
+            box-shadow: 0 12px 35px rgba(255, 80, 120, 0.5);
+        }
+
+        .cake-container:active {
+            transform: scale(0.98);
+        }
+
+        .cake-icon {
+            font-size: 2.8rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            transition: all 0.2s;
+        }
+
+        .cake-text {
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #FFE6B0, #FFB88C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .knife-hint {
+            font-size: 0.8rem;
+            margin-top: 12px;
+            opacity: 0.8;
+            color: #ffd0e6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Cake cut animation */
+        @keyframes sliceAnim {
+            0% { transform: rotate(0deg) scale(1); }
+            30% { transform: rotate(-15deg) scale(1.2); }
+            60% { transform: rotate(10deg) scale(1.1); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .cake-cut-animation {
+            animation: sliceAnim 0.4s ease-in-out;
+        }
+
+        /* Memory gallery */
+        .memory-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .memory-circle {
+            background: linear-gradient(145deg, #ffb7c5, #ff7a9e);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255, 235, 245, 0.9);
+            color: #2c0a38;
+        }
+
+        .letter-premium {
+            background: rgba(44, 10, 56, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.5rem;
+            text-align: left;
+            border-left: 5px solid #ff7a9e;
+            margin: 1.2rem 0;
+            color: #fff0f5;
+        }
+
+        .pulse-icon {
+            font-size: 3rem;
+            display: inline-block;
+            animation: softPulse 1.4s infinite;
+        }
+
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); text-shadow: 0 0 15px #ff66aa; }
+        }
+
+        /* Progress indicators */
+        .premium-progress {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(30, 8, 40, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ffbfd5;
+            border: 1px solid #ff7aa0;
+            z-index: 200;
+        }
+
+        .page-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(188, 63, 188, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-weight: 800;
+            color: white;
+            font-size: 1.1rem;
+            z-index: 200;
+            border: 1px solid #ffb3d1;
+        }
+
+        /* Floating effects */
+        .floating-particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.2rem;
+            animation: riseUp 4s linear forwards;
+            z-index: 999;
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(0) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-200px) scale(1.2); opacity: 0; }
+        }
+
+        .cut-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            pointer-events: none;
+            z-index: 2000;
+            animation: popEffect 0.5s ease-out forwards;
+        }
+
+        @keyframes popEffect {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+            30% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
+        }
+
+        .bg-luxury {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-floating-heart {
+            position: absolute;
+            color: rgba(255, 100, 150, 0.2);
+            font-size: 2rem;
+            animation: bgFloat 15s infinite linear;
+        }
+
+        @keyframes bgFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.2; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 650px) {
+            .premium-card { padding: 1.5rem; width: 92%; }
+            .memory-circle { width: 70px; height: 70px; font-size: 2rem; }
+            .cake-container { padding: 10px 20px; gap: 12px; }
+            .cake-icon { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="story-container">
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide1">
+        <div class="premium-card">
+            <i class="fas fa-crown pulse-icon" style="color: #FFB7C5;"></i>
+            <h1 style="font-size: 2.8rem;">🎂 Happy Birthday 🎂</h1>
+            <h2 class="name-glow-special" style="font-size: 3rem;">Arijita Paria</h2>
+            <p style="margin: 1rem 0;">Cut the cake to begin the magical journey of 10 chapters</p>
+            <div class="cake-section" data-next="2">
+                <div class="cake-container">
+                    <i class="fas fa-birthday-cake cake-icon"></i>
+                    <span class="cake-text">✂️ CUT THE CAKE & BEGIN ✂️</span>
+                    <i class="fas fa-cut cake-icon"></i>
+                </div>
+                <div class="knife-hint"><i class="fas fa-hand-pointer"></i> Tap on cake to cut & celebrate!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2 to 9 (similar structure) -->
+    <div class="slide" id="slide2">
+        <div class="premium-card">
+            <i class="fas fa-heart pulse-icon" style="color: #ff99cc;"></i>
+            <h2>🌸 The Day You Were Born 🌸</h2>
+            <p>When stardust and roses conspired, they created Arijita — a soul that radiates warmth.</p>
+            <div class="letter-premium"><i class="fas fa-quote-left"></i> Every heartbeat of yours adds color to the universe.</div>
+            <div class="cake-section" data-next="3"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🎂 CUT CAKE → NEXT 🎂</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Tap to cut & continue</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide3">
+        <div class="premium-card">
+            <h2><i class="fas fa-images"></i> Beautiful Memories</h2>
+            <div class="memory-gallery"><div class="memory-circle"><i class="fas fa-laugh-beam"></i></div><div class="memory-circle"><i class="fas fa-dove"></i></div><div class="memory-circle"><i class="fas fa-moon"></i></div></div>
+            <div class="cake-section" data-next="4"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🍰 CUT FOR MEMORIES 🍰</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Cut the cake → next</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide4">
+        <div class="premium-card">
+            <h2>💌 A Frienship Letter</h2>
+            <div class="letter-premium">“Dearest Arijita, your presence is like a blooming rose. On your birthday, I wish you oceans of happiness.” — Forever yours 🌹</div>
+            <div class="cake-section" data-next="5"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🎂 CUT THE LOVE CAKE 🎂</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Tap to slice</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide5">
+        <div class="premium-card">
+            <h2>✨ 5 Reasons You're Magic ✨</h2>
+            <div style="text-align:left"><p>💖 1. Your elegance & charm</p><p>🌸 2. You make everyone feel seen</p><p>🌟 3. Your fearless dreams</p><p>💫 4. You turn ordinary to magical</p><p>👑 5. Because you are Arijita</p></div>
+            <div class="cake-section" data-next="6"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🍰 CUT FOR WISHES 🍰</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Tap → next celebration</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide6">
+        <div class="premium-card">
+            <h2>🌙 A Celestial Promise 🌙</h2>
+            <p>May this year bring you constellations of joy. You deserve the infinite sky!</p>
+            <div class="cake-section" data-next="7"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🎂 SLICE THE CAKE 🎂</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Cut to continue</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide7">
+        <div class="premium-card">
+            <h2>💪 The Warrior Within</h2>
+            <p>You are fierce, graceful, unstoppable. This will be your BEST year yet!</p>
+            <div class="cake-section" data-next="8"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🍰 CUT FOR STRENGTH 🍰</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Tap cake</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide8">
+        <div class="premium-card">
+            <h2>🎂 Make A Special Wish 🎂</h2>
+            <p>Blow the candles in your heart — every wish is coming true!</p>
+            <div class="cake-section" data-next="9"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🎂 CUT & CELEBRATE! 🎂</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Slice the joy</div></div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide9">
+        <div class="premium-card">
+            <h2>🤝 A Timeless Promise</h2>
+            <p>Through every season, I'll be cheering for you. Happy Birthday, my love.</p>
+            <div class="cake-section" data-next="10"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🍰 FINAL SLICE 🍰</span><i class="fas fa-cut cake-icon"></i></div><div class="knife-hint">Cut cake to reach Grand Finale</div></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: FINALE -->
+    <div class="slide" id="slide10">
+        <div class="premium-card">
+            <i class="fas fa-infinity pulse-icon"></i>
+            <h1 class="name-glow-special">Arijita Paria</h1>
+            <p>✨ You are the most beautiful chapter of my life. ✨</p>
+            <div style="font-size: 2rem; margin: 15px;">🌹💗🎉💖🎈</div>
+            <div class="cake-section" id="replayCake"><div class="cake-container"><i class="fas fa-birthday-cake cake-icon"></i><span class="cake-text">🎂 CUT AGAIN TO RELIVE 🎂</span><i class="fas fa-redo-alt"></i></div><div class="knife-hint">Tap to restart the magic</div></div>
+        </div>
+    </div>
+</div>
+
+<div class="premium-progress" id="storyProgress">🍰 CUT THE CAKE 🍰</div>
+<div class="page-counter" id="pageCounter">1 / 10</div>
+<canvas id="confetti-canvas"></canvas>
+<div class="bg-luxury" id="bgLuxury"></div>
+
+<script>
+    // ========== FIXED: CAKE CUT WORKING PROPERLY ==========
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const pageCounter = document.getElementById('pageCounter');
+    const progressSpan = document.getElementById('storyProgress');
+    
+    // Titles for progress
+    const titles = ["✨ Royal Start", "🌸 First Spark", "📸 Memories", "💌 Love Letter", "🌟 5 Reasons", "🌙 Cosmic Wish", "⚡ Warrior", "🎂 Sweet Surprise", "🤝 Promise", "👑 Grand Finale"];
+
+    function updateUI() {
+        pageCounter.innerText = `${currentIndex + 1} / ${totalSlides}`;
+        progressSpan.innerHTML = `🍰 ${titles[currentIndex]} 🍰`;
+    }
+
+    function showSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        slides.forEach((slide, i) => {
+            if (i === index) slide.classList.add('active');
+            else slide.classList.remove('active');
+        });
+        currentIndex = index;
+        updateUI();
+        
+        // Confetti on finale
+        if (index === totalSlides - 1) startConfetti();
+        else stopConfetti();
+        
+        createSparkles(20);
+    }
+
+    // ========== CAKE CUT FUNCTION - YAHAN CUT HOTA HAI ==========
+    function cutTheCake(nextPageNum, cakeElement) {
+        console.log("🎂 CAKE CUT! Moving to page:", nextPageNum);
+        
+        // 1. Cake icon animation (hilna)
+        const icon = cakeElement.querySelector('.cake-icon');
+        if (icon) {
+            icon.classList.add('cake-cut-animation');
+            setTimeout(() => icon.classList.remove('cake-cut-animation'), 400);
+        }
+        
+        // 2. Cut effect dikhana (🍰🔪✨)
+        const effectDiv = document.createElement('div');
+        effectDiv.className = 'cut-effect';
+        effectDiv.innerHTML = '🍰🔪✨';
+        document.body.appendChild(effectDiv);
+        setTimeout(() => effectDiv.remove(), 500);
+        
+        // 3. Confetti burst
+        startConfettiTemp();
+        
+        // 4. Floating hearts & roses
+        createFloatingHearts(25);
+        
+        // 5. Thodi der baad next page pe jao
+        setTimeout(() => {
+            if (nextPageNum === 1) {
+                showSlide(0);
+            } else if (nextPageNum >= 2 && nextPageNum <= totalSlides) {
+                showSlide(nextPageNum - 1);
+            } else {
+                if (currentIndex + 1 < totalSlides) showSlide(currentIndex + 1);
+            }
+        }, 400);
+    }
+    
+    // ========== EVENT LISTENER - SABSE IMPORTANT ==========
+    function attachCakeEvents() {
+        const allCakeSections = document.querySelectorAll('.cake-section');
+        console.log("Found cake sections:", allCakeSections.length);
+        
+        allCakeSections.forEach(section => {
+            // Remove old listener agar ho toh
+            section.removeEventListener('click', cakeClickHandler);
+            section.addEventListener('click', cakeClickHandler);
+        });
+    }
+    
+    function cakeClickHandler(event) {
+        event.stopPropagation();
+        console.log("🎂 Cake section CLICKED!");
+        
+        const nextVal = this.getAttribute('data-next');
+        let targetPage = null;
+        
+        if (this.id === 'replayCake') {
+            targetPage = 1;
+        } else if (nextVal) {
+            targetPage = parseInt(nextVal);
+        }
+        
+        if (targetPage && !isNaN(targetPage)) {
+            cutTheCake(targetPage, this);
+        } else {
+            // default: next page
+            if (currentIndex + 2 <= totalSlides) {
+                cutTheCake(currentIndex + 2, this);
+            } else {
+                cutTheCake(1, this);
+            }
+        }
+    }
+    
+    // ========== EFFECTS ==========
+    function createFloatingHearts(count) {
+        for (let i = 0; i < count; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-particle';
+            const icons = ['❤️', '💖', '🌹', '🌸', '💗', '✨', '🎂'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.bottom = '-20px';
+            heart.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+    }
+    
+    function createSparkles(count) {
+        for (let i = 0; i < count; i++) {
+            const spark = document.createElement('div');
+            spark.innerHTML = '✨';
+            spark.style.position = 'fixed';
+            spark.style.left = Math.random() * window.innerWidth + 'px';
+            spark.style.top = Math.random() * window.innerHeight + 'px';
+            spark.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+            spark.style.pointerEvents = 'none';
+            spark.style.zIndex = '1001';
+            spark.style.transition = 'all 0.4s';
+            document.body.appendChild(spark);
+            setTimeout(() => {
+                spark.style.transform = 'scale(2)';
+                spark.style.opacity = '0';
+                setTimeout(() => spark.remove(), 400);
+            }, 10);
+        }
+    }
+    
+    // ========== CONFETTI SYSTEM ==========
+    let confettiActive = false;
+    const canvas = document.getElementById('confetti-canvas');
+    let ctx = canvas.getContext('2d');
+    let animationId = null;
+    let confettiParticles = [];
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    class Confetti {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height - canvas.height;
+            this.size = Math.random() * 7 + 3;
+            this.speedY = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 2.5;
+            this.color = `hsl(${Math.random() * 60 + 320}, 80%, 65%)`;
+        }
+        update() {
+            this.y += this.speedY;
+            this.x += this.speedX;
+            if (this.y > canvas.height + 50) {
+                this.y = -30;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
+        }
+    }
+    
+    function startConfetti() {
+        if (confettiActive) stopConfetti();
+        confettiActive = true;
+        confettiParticles = [];
+        for (let i = 0; i < 150; i++) confettiParticles.push(new Confetti());
+        function animate() {
+            if (!confettiActive) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let p of confettiParticles) {
+                p.update();
+                p.draw();
+            }
+            animationId = requestAnimationFrame(animate);
+        }
+        animate();
+    }
+    
+    function startConfettiTemp() {
+        startConfetti();
+        setTimeout(() => stopConfetti(), 3000);
+    }
+    
+    function stopConfetti() {
+        if (animationId) cancelAnimationFrame(animationId);
+        if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettiActive = false;
+        confettiParticles = [];
+    }
+    
+    // ========== BACKGROUND HEARTS ==========
+    function generateBackgroundHearts() {
+        const bgDiv = document.getElementById('bgLuxury');
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.className = 'bg-floating-heart';
+            heart.innerHTML = ['❤️', '💖', '🌹', '🌸', '🎂'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (1 + Math.random() * 2) + 'rem';
+            heart.style.animationDuration = 12 + Math.random() * 10 + 's';
+            bgDiv.appendChild(heart);
+            setTimeout(() => heart.remove(), 20000);
+        }, 800);
+    }
+    
+    // ========== INITIALIZE ==========
+    function init() {
+        showSlide(0);
+        attachCakeEvents();
+        generateBackgroundHearts();
+        createFloatingHearts(15);
+        
+        // Keyboard support
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                if (currentIndex + 1 < totalSlides) showSlide(currentIndex + 1);
+            } else if (e.key === 'ArrowLeft') {
+                if (currentIndex > 0) showSlide(currentIndex - 1);
+            }
+        });
+        
+        console.log("✅ Website ready! Tap on any cake to cut and continue.");
+    }
+    
+    init();
+</script>
+</body>
+</html>
